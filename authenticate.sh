@@ -17,12 +17,7 @@ echo curl -vv --header 'Content-Type: application/json' --header 'Accept: applic
    "name": "Image uploaded", \ 
    "description": "Image uploaded, duh", \ 
    "webhook_url": "http://requestb.in/1mmkhdb1", \ 
-   "events_of_interest": [ \ 
-     { \ 
-       "event_code": "sc_asset_created", \ 
-       "provider": "sc" \ 
-     } \ 
-   ] \ 
+   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ] \
 }' 'https://csm-stage.adobe.io/csm/users/webhooks'
 
 Sleep 1
@@ -32,10 +27,5 @@ curl -vv --header 'Content-Type: application/json' --header 'Accept: application
    "name": "Image uploaded", \ 
    "description": "Image uploaded, duh", \ 
    "webhook_url": "http://requestb.in/1mmkhdb1", \ 
-   "events_of_interest": [ \ 
-     { \ 
-       "event_code": "sc_asset_created", \ 
-       "provider": "sc" \ 
-     } \ 
-   ] \ 
+   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ] \ 
 }' 'https://csm-stage.adobe.io/csm/users/webhooks'
