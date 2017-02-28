@@ -23,7 +23,7 @@ echo curl -vv --header 'Content-Type: application/json' --header 'Accept: applic
        "provider": "sc" \ 
      } \ 
    ] \ 
-}' 'https://csm-dev.adobe.io/csm/users/webhooks'
+}' 'https://csm-stage.adobe.io/csm/users/webhooks'
 
 Sleep 1
 
@@ -38,4 +38,4 @@ curl -vv --header 'Content-Type: application/json' --header 'Accept: application
        "provider": "sc" \ 
      } \ 
    ] \ 
-}' 'https://csm-dev.adobe.io/csm/users/webhooks'
+}' 'https://csm-stage.adobe.io/csm/users/webhooks'
