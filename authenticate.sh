@@ -13,6 +13,9 @@ echo ""
 echo "Got this token:"
 echo $TOKEN
 
+# Getting the user access token
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=authorization_code&client_id=$CLIENT_ID&client_secret=$1&code=$TOKEN" "https://ims-na1-stg1.adobelogin.com/ims/token/v1"
+
 echo "Running: "
 echo curl -vv --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer $TOKEN" --header "x-api-key: $CLIENT_ID" -d '{ \ 
    "client_id": '"$1"', \ 
