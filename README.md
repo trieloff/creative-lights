@@ -16,7 +16,7 @@ This script assumes macOS, with Safari as a default browser.
 The first step in the process is to register a webhook with Adobe I/O Events. There is a small helper script that authenticates the app, gets the authentication token and registers the webhook.
 
 ```
-./authenticate.sh <X-API-KEY>
+./register-webhook.sh <SECRET-KEY>
 ```
 
-The script accepts one parameter X-API-KEY, which you can find #FIXME
+The script accepts one parameter SECRET-KEY, which I won't hard code (hint: it's secret), but you can get it from the Adobe I/O Console when registering your application.
