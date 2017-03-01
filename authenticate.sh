@@ -1,6 +1,13 @@
 #!/bin/sh
 # Replace this with your own Client ID
 CLIENT_ID="8d06fe64c9ea43b4a41adf9348dec9ae"
+
+# Replace this with your own Consumer ID
+CONSUMER_ID=""
+
+# Replace this with your own Application ID
+APPLICATION_ID=""
+
 open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?response_type=code&client_id=$CLIENT_ID&scope=AdobeID%2Copenid%2Ccreative_sdk&redirect_uri=https://requestb.in/y4nwg5y4"
 #open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?client_id=$CLIENT_ID&response_type=token&redirect_uri=https://requestb.in/y4nwg5y4&scope=openid,creative_sdk"
 sleep 10
@@ -16,21 +23,20 @@ echo $TOKEN
 # Getting the user access token
 ACCESS_TOKEN=`curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=authorization_code&client_id=$CLIENT_ID&client_secret=$1&code=$TOKEN" "https://ims-na1-stg1.adobelogin.com/ims/token/v1" | jq -r .access_token`
 
-echo "Running: "
-echo curl -vv --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer $TOKEN" --header "x-api-key: $CLIENT_ID" -d '{ \ 
+
+# curl -X POST -H "authorization: Bearer <user access token from previous step>" -H "content-type: application/json" -H "x-ams-consumer-id: <consumer id>" -H "x-ams-application-id: <application id>" -H "x-api-key: <client id of the app created earlier in the Adobe I/O console>" -d '{ "client_id": "<client id of the app created earlier in the Adobe I/O console>", "name": "<a name>", "description": "<a description>", "webhook_url": "<the https webscript.io URL you created above>",   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ]    }' "https://csm-stage.adobe.io/csm/webhooks"
+
+curl -vv \
+	--header 'Content-Type: application/json' \
+	--header 'Accept: application/json' \
+	--header "Authorization: Bearer $ACCESS_TOKEN" \
+	--header "x-api-key: $CLIENT_ID" \
+	--header "x-ams-consumer-id: $CONSUMER_ID" \
+	--header "x-ams-application-id: $APPLICATION_ID"
+	-d '{ \ 
    "client_id": '"$1"', \ 
    "name": "Image uploaded", \ 
    "description": "Image uploaded, duh", \ 
    "webhook_url": "http://requestb.in/1mmkhdb1", \ 
    "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ] \
-}' 'https://csm-stage.adobe.io/csm/users/webhooks'
-
-Sleep 1
-
-curl -vv --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer $TOKEN" --header "x-api-key: $CLIENT_ID" -d '{ \ 
-   "client_id": '"$1"', \ 
-   "name": "Image uploaded", \ 
-   "description": "Image uploaded, duh", \ 
-   "webhook_url": "http://requestb.in/1mmkhdb1", \ 
-   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ] \ 
 }' 'https://csm-stage.adobe.io/csm/users/webhooks'
