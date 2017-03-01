@@ -1,0 +1,9 @@
+package:
+  name: creative-lights
+  version: 1.0
+  license: Apache-2.0
+  actions:
+    handle-webhook:
+      version: 1.0
+      location: webhook-handler.js
+      runtime: nodejs@6
