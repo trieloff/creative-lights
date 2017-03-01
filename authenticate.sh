@@ -10,7 +10,24 @@ CONSUMER_ID="1609"
 # Replace this with your own Application ID
 APPLICATION_ID="2993"
 
-WEBHOOK_URL="https://requestb.in/15pxg4p1"
+# Create a WebScript here at webscript.io with following contents
+
+#	local request  = request
+#	local method = request.method
+#	if method == "GET" then
+#	    if (request.query["challenge"]) then
+#	        log("got challenge: " .. request.query["challenge"])
+#	    else
+#	        log("no challenge")
+#	    end
+#	    return request.query["challenge"]
+#	end
+#	if method == "POST" then
+#	    log("webhook invoked with: " .. request.body)
+#	    return request.body
+#	end
+
+WEBHOOK_URL="https://demo-otgpoz.webscript.io/script"
 
 open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?response_type=code&client_id=$CLIENT_ID&scope=AdobeID%2Copenid%2Ccreative_sdk&redirect_uri=https://requestb.in/y4nwg5y4"
 #open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?client_id=$CLIENT_ID&response_type=token&redirect_uri=https://requestb.in/y4nwg5y4&scope=openid,creative_sdk"
@@ -41,4 +58,4 @@ curl -vv \
 	"https://csm-stage.adobe.io/csm/webhooks"
 
 
-open https://assets-stage.adobecc.com/
+open https://assets-stage.adobecc.com/files
