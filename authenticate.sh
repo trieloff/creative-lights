@@ -3,10 +3,14 @@
 CLIENT_ID="8d06fe64c9ea43b4a41adf9348dec9ae"
 
 # Replace this with your own Consumer ID
-CONSUMER_ID=""
+# Get this from https://admin-stage.adobe.io/ then navigate to your app
+# https://admin-stage.adobe.io/consumer/org/$CONSUMER_ID/apps/$APPLICATION_ID
+CONSUMER_ID="1609"
 
 # Replace this with your own Application ID
-APPLICATION_ID=""
+APPLICATION_ID="2993"
+
+WEBHOOK_URL="https://requestb.in/15pxg4p1"
 
 open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?response_type=code&client_id=$CLIENT_ID&scope=AdobeID%2Copenid%2Ccreative_sdk&redirect_uri=https://requestb.in/y4nwg5y4"
 #open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?client_id=$CLIENT_ID&response_type=token&redirect_uri=https://requestb.in/y4nwg5y4&scope=openid,creative_sdk"
@@ -32,11 +36,9 @@ curl -vv \
 	--header "Authorization: Bearer $ACCESS_TOKEN" \
 	--header "x-api-key: $CLIENT_ID" \
 	--header "x-ams-consumer-id: $CONSUMER_ID" \
-	--header "x-ams-application-id: $APPLICATION_ID"
-	-d '{ \ 
-   "client_id": '"$1"', \ 
-   "name": "Image uploaded", \ 
-   "description": "Image uploaded, duh", \ 
-   "webhook_url": "http://requestb.in/1mmkhdb1", \ 
-   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ] \
-}' 'https://csm-stage.adobe.io/csm/users/webhooks'
+	--header "x-ams-application-id: $APPLICATION_ID" \
+	-d '{ "client_id": "'$CLIENT_ID'", "name": "Files uploaded", "description": "Let me know when files have been uploaded", "webhook_url": "'$WEBHOOK_URL'",   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ]    }' \
+	"https://csm-stage.adobe.io/csm/webhooks"
+
+
+open https://assets-stage.adobecc.com/
