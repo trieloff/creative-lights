@@ -29,25 +29,30 @@ APPLICATION_ID="2993"
 
 WEBHOOK_URL="https://demo-otgpoz.webscript.io/script"
 
+echo "Asking the user (you) to authorize the application"
+
 open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?response_type=code&client_id=$CLIENT_ID&scope=AdobeID%2Copenid%2Ccreative_sdk&redirect_uri=https://requestb.in/y4nwg5y4"
-#open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?client_id=$CLIENT_ID&response_type=token&redirect_uri=https://requestb.in/y4nwg5y4&scope=openid,creative_sdk"
-sleep 10
-REDIRECT=`osascript -e 'tell Application "Safari" to return URL of front document'`
+REDIRECT=""
+until [ `echo $REDIRECT | grep code` ]; do
+	sleep 1
+	REDIRECT=`osascript -e 'tell Application "Safari" to return URL of front document'`
+	echo "not there yet…"
+done
+
+echo "Authorization received, now getting token from redirect target"
+
 TOKEN=`echo $REDIRECT | sed -e "s/.*code=//" | sed -e "s/&.*//"`
-#TOKEN=`echo $REDIRECT | sed -e "s/.*#access_token=//" | sed -e "s/&.*//"`
-echo $TOKEN | pbcopy
-#TOKEN=`pbpaste`
-echo ""
-echo "Got this token:"
-echo $TOKEN
+
+echo "Exchanging token for user access token"
 
 # Getting the user access token
 ACCESS_TOKEN=`curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=authorization_code&client_id=$CLIENT_ID&client_secret=$1&code=$TOKEN" "https://ims-na1-stg1.adobelogin.com/ims/token/v1" | jq -r .access_token`
 
+echo "Access token received."
 
-# curl -X POST -H "authorization: Bearer <user access token from previous step>" -H "content-type: application/json" -H "x-ams-consumer-id: <consumer id>" -H "x-ams-application-id: <application id>" -H "x-api-key: <client id of the app created earlier in the Adobe I/O console>" -d '{ "client_id": "<client id of the app created earlier in the Adobe I/O console>", "name": "<a name>", "description": "<a description>", "webhook_url": "<the https webscript.io URL you created above>",   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ]    }' "https://csm-stage.adobe.io/csm/webhooks"
+echo "Now registering the WebHook"
 
-curl -vv \
+curl \
 	--header 'Content-Type: application/json' \
 	--header 'Accept: application/json' \
 	--header "Authorization: Bearer $ACCESS_TOKEN" \
@@ -57,5 +62,8 @@ curl -vv \
 	-d '{ "client_id": "'$CLIENT_ID'", "name": "Files uploaded", "description": "Let me know when files have been uploaded", "webhook_url": "'$WEBHOOK_URL'",   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ]    }' \
 	"https://csm-stage.adobe.io/csm/webhooks"
 
+echo "WebHook registered."
+
+echo "Opening browser, please upload a file to Creative Cloud"
 
 open https://assets-stage.adobecc.com/files
