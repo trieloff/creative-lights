@@ -2,6 +2,14 @@
 
 This is a small example application that connects Adobe I/O Events with Creative Cloud, Adobe I/O Runtime and Philips Hue.
 
+# Prerequisites
+
+You need `jq`, which is a command line JSON parser and all-around awesome.
+
+```
+brew install jq
+```
+
 # Getting started
 This script assumes macOS, with Safari as a default browser. 
 
