@@ -63,7 +63,7 @@ function getColors(assetUrn, token) {
 		"uri": "https://cc-api-storage-stage.adobe.io/id/" + assetUrn + "/:metadata", 
 		"headers": {"x-api-key": api_key, "Authorization": "Bearer " + token, "Accept": "application/vnd.adobe.file+json"}, 
 		"json": true}).then(function(body) {
-			return body.kuler.rgb.map(rgb2Hue);
+			return {"colors": body.kuler.rgb.map(rgb2Hue)};
 		});
 }
 
@@ -82,28 +82,26 @@ changeColor("green").then(function(body) {
  * @param challenge challenge required for registering WebHook
  */
 function main(params) {
-	return {
-		"secret": params.secret,
-		"usertoken": decrypt(secrettoken, params.secret)
-	};
-	
-    var challenge = params.challenge;
-    if (challenge) {
-		return { "challenge": challenge };
-    }
-	if (params.asset && params.asset.mime_type) {
-		if (params.asset.mime_type=="image/jpeg") {
-			return changeColor("red").then(function(body) {
-				return {"color": "red", "response": body};
-			});
-		} else if (params.asset.mime_type=="image/png") {
-			return changeColor("green").then(function(body) {
-				return {"color": "green", "response": body};
-			});
-		} else {
-			return {"color":"blue"};
-		}
-	} else {
-		return {"echo": params};	
-	}
+  var challenge = params.challenge;
+  if (challenge) {
+    return { "challenge": challenge };
+  }
+  if (params.asset && params.asset.urn) {
+    return getColors(params.asset.urn, decrypt(secrettoken, params.secret));
+  }
+  if (params.asset && params.asset.mime_type) {
+    if (params.asset.mime_type=="image/jpeg") {
+      return changeColor("red").then(function(body) {
+      return {"color": "red", "response": body};
+    });
+    } else if (params.asset.mime_type=="image/png") {
+      return changeColor("green").then(function(body) {
+      return {"color": "green", "response": body};
+    });
+    } else {
+      return {"color":"blue"};
+  }
+  } else {
+    return {"echo": params};	
+  }
 }
