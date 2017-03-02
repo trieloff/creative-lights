@@ -7,7 +7,7 @@ package:
       version: 1.0
       location: webhook-handler.js
       runtime: nodejs@6
-	  inputs:
-		  	secret:
-				type: String
-				description: User token for authentication
+      inputs:
+                secret:
+                type: String
+                description: User token for authentication
