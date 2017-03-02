@@ -4,5 +4,8 @@
  */
 function main(params) {
     var challenge = params.challenge;
-    return challenge;
+    if (challenge) {
+		return { "challenge": challenge };
+    }
+	return { "nothing":"void" };
 }
