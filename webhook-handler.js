@@ -7,5 +7,15 @@ function main(params) {
     if (challenge) {
 		return { "challenge": challenge };
     }
-	return {"echo": params};
+	if (params.asset && params.asset.mime_type) {
+		if (params.asset.mime_type=="image/jpeg") {
+			return {"color":"red"};
+		} else if (params.asset.mime_type=="image/png") {
+			return {"color":"green"};
+		} else {
+			return {"color":"blue"};
+		}
+	} else {
+		return {"echo": params};	
+	}
 }
