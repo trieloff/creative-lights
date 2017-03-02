@@ -63,7 +63,7 @@ function getColors(assetUrn, token) {
 		"uri": "https://cc-api-storage-stage.adobe.io/id/" + assetUrn + "/:metadata", 
 		"headers": {"x-api-key": api_key, "Authorization": "Bearer " + token, "Accept": "application/vnd.adobe.file+json"}, 
 		"json": true}).then(function(body) {
-			return body.kuler.rgb.map(rgb2Hue);
+			return {"colors": body.kuler.rgb.map(rgb2Hue)};
 		});
 }
 
@@ -87,16 +87,21 @@ function main(params) {
     return { "challenge": challenge };
   }
   if (params.asset && params.asset.urn) {
-    return getColors(params.asset.urn, decrypt(secrettoken, params.secret));
+    return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
+      //TODO: actually iterate through the colors and change the hue lamps.
+      return changeColor("red").then(function(body) {
+        return {"color": "red", "response": body, "colors": colors};
+      });
+    });
   }
   if (params.asset && params.asset.mime_type) {
     if (params.asset.mime_type=="image/jpeg") {
       return changeColor("red").then(function(body) {
-      return {"color": "red", "response": body};
-    });
+        return {"color": "red", "response": body};
+      });
     } else if (params.asset.mime_type=="image/png") {
       return changeColor("green").then(function(body) {
-      return {"color": "green", "response": body};
+        return {"color": "green", "response": body};
     });
     } else {
       return {"color":"blue"};
