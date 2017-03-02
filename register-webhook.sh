@@ -10,24 +10,7 @@ CONSUMER_ID="1609"
 # Replace this with your own Application ID
 APPLICATION_ID="2993"
 
-# Create a WebScript here at webscript.io with following contents
-
-#	local request  = request
-#	local method = request.method
-#	if method == "GET" then
-#	    if (request.query["challenge"]) then
-#	        log("got challenge: " .. request.query["challenge"])
-#	    else
-#	        log("no challenge")
-#	    end
-#	    return request.query["challenge"]
-#	end
-#	if method == "POST" then
-#	    log("webhook invoked with: " .. request.body)
-#	    return request.body
-#	end
-
-WEBHOOK_URL="https://demo-otgpoz.webscript.io/script"
+WEBHOOK_URL="https://6v0m5wjis3.execute-api.eu-west-1.amazonaws.com/prod/"
 
 echo "Asking the user (you) to authorize the application"
 
