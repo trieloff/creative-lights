@@ -1,3 +1,5 @@
+var http = require("http");
+
 /**
  * WebHook handler for Adobe I/O Events.
  * @param challenge challenge required for registering WebHook
