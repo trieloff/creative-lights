@@ -82,14 +82,15 @@ changeColor("green").then(function(body) {
  * @param challenge challenge required for registering WebHook
  */
 function main(params) {
-    var challenge = params.challenge;
-    if (challenge) {
-		return { "challenge": challenge };
-    }
 	return {
 		"secret": params.secret,
 		"usertoken": decrypt(secrettoken, params.secret)
 	};
+	
+    var challenge = params.challenge;
+    if (challenge) {
+		return { "challenge": challenge };
+    }
 	if (params.asset && params.asset.mime_type) {
 		if (params.asset.mime_type=="image/jpeg") {
 			return changeColor("red").then(function(body) {
