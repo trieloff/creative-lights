@@ -33,8 +33,6 @@ function rgb2Hue(hex) {
     return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254) };
 }
 
-console.log(rgb2Hsl("A5778C"));
-
 function getColors(assetUrn, token) {
 	return request({
 		"method":"GET", 
