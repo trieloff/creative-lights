@@ -7,5 +7,5 @@ function main(params) {
     if (challenge) {
 		return { "challenge": challenge };
     }
-	return { "nothing":"void" };
+	return {"echo": params};
 }
