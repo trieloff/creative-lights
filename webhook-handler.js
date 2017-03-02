@@ -63,7 +63,7 @@ function getColors(assetUrn, token) {
 		"uri": "https://cc-api-storage-stage.adobe.io/id/" + assetUrn + "/:metadata", 
 		"headers": {"x-api-key": api_key, "Authorization": "Bearer " + token, "Accept": "application/vnd.adobe.file+json"}, 
 		"json": true}).then(function(body) {
-			return {"colors": body.kuler.rgb.map(rgb2Hue)};
+			return body.kuler.rgb.map(rgb2Hue);
 		});
 }
 
