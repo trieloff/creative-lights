@@ -126,7 +126,7 @@ function main(params) {
                   //return setLight(params.bridge, light, colors.colors[i%5]).then(function(body) {
                   //  return body;
                   //});
-                  return colors.colors[i%5];
+                  //return colors.colors[i%5];
                 })};
         /*
         lights.map(function(light, i) {
