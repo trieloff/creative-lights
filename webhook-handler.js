@@ -30,6 +30,16 @@ function changeColor(color) {
 	return request({"method":"POST", "uri": "http://maker.ifttt.com/trigger/" + color + "/with/key/bLghUjKHwCSv9rqZeXdSxq"});
 }
 
+function setLight(uri, light, state) {
+  return request({"method":"PUT", "uri": uri + "lights/" + light + "/state", "json": true, body: state});
+}
+
+function getLights(uri) {
+  return request({"method":"GET", "uri": uri, "json": true}).then(function(body) {
+    return Object.keys(body.lights);
+  });
+}
+
 function rgb2Hue(hex) {
 	var r = parseInt(hex.substring(0, 2), 16) / 255;
 	var g = parseInt(hex.substring(2, 4), 16) / 255;
@@ -89,8 +99,11 @@ function main(params) {
   if (params.asset && params.asset.urn) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
-      return changeColor("red").then(function(body) {
-        return {"color": "red", "response": body, "colors": colors};
+      getLights(params.bridge).then(function(lights) {
+        lights.map(function(light, i) {
+          console.log(i % 5);
+          setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        });
       });
     });
   }
