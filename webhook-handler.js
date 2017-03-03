@@ -73,7 +73,7 @@ function rgb2Hue(hex) {
     }
 	
 	//transform into Hue's format
-    return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254), "alert": "none" };
+    return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254), "alert": "select" };
 }
 
 function getColors(assetUrn, token) {
