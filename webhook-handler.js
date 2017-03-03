@@ -73,7 +73,7 @@ function rgb2Hue(hex) {
     }
 	
 	//transform into Hue's format
-    return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254), "alert": "select" };
+    return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254), "alert": "none" };
 }
 
 function getColors(assetUrn, token) {
@@ -108,7 +108,7 @@ function main(params) {
   if (params.asset && params.asset.urn) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       return getLights(params.bridge).then(function(lights) {
-        return {"lights": lights};
+        //return {"lights": lights};
         var responses = lights.map(function(light, i) {
           return setLight(params.bridge, light, colors.colors[i%5]);
         });
