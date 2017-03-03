@@ -110,7 +110,7 @@ function main(params) {
     //        "bridge": params.bridge,
     //        "token" : decrypt(secrettoken, params.secret)};
     
-    setLight(params.bridge, 48, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+    setLight(params.bridge, 45, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
     
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
