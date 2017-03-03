@@ -118,13 +118,13 @@ function main(params) {
       //return colors;
       var lights = [45, 48];
       
-      lights.map(function(light, i) {
+      var mapped = lights.map(function(light, i) {
         return setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).then(function(res) {
           return colors.colors[i%5];
         });
       });
       
-      return {};
+      return {"mapped": mapped};
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
                 "status": lights.map(function(light, i) {
