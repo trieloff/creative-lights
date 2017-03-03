@@ -106,10 +106,10 @@ function main(params) {
     return { "challenge": challenge };
   }
   if (params.asset && params.asset.urn) {
-    return {"secret": params.secret,
-            "bridge": params.bridge,
-            "token" : decrypt(secrettoken, params.secret)};
-    /*
+    //return {"secret": params.secret,
+    //        "bridge": params.bridge,
+    //        "token" : decrypt(secrettoken, params.secret)};
+    
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
       getLights(params.bridge).then(function(lights) {
@@ -119,6 +119,6 @@ function main(params) {
         });
       });
     });
-    */
+    
   }
 }
