@@ -16,6 +16,7 @@ echo "Asking the user (you) to authorize the application"
 
 open "https://ims-na1-stg1.adobelogin.com/ims/authorize/v1?response_type=code&client_id=$CLIENT_ID&scope=AdobeID%2Copenid%2Ccreative_sdk&redirect_uri=https://requestb.in/y4nwg5y4"
 REDIRECT=""
+sleep 10
 until [ `echo $REDIRECT | grep code` ]; do
 	sleep 1
 	REDIRECT=`osascript -e 'tell Application "Safari" to return URL of front document'`
@@ -32,6 +33,12 @@ echo "Exchanging token for user access token"
 ACCESS_TOKEN=`curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=authorization_code&client_id=$CLIENT_ID&client_secret=$1&code=$TOKEN" "https://ims-na1-stg1.adobelogin.com/ims/token/v1" | jq -r .access_token`
 
 echo "Access token received."
+
+echo ""
+echo $ACCESS_TOKEN
+echo ""
+
+node webhook-handler.js $ACCESS_TOKEN $CLIENT_ID
 
 echo "Now registering the WebHook"
 
