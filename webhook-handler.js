@@ -119,7 +119,7 @@ function main(params) {
       var lights = [45, 48];
       
       for (var i=0;i<lights.length;i++) {
-        return setLight(params.bridge, 45, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
       }
       
       
