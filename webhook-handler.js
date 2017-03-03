@@ -104,7 +104,7 @@ function main(params) {
     return { "challenge": challenge };
   }
   if (params.asset && params.asset.urn) {
-    return params.secret;
+    return {"secret": params.secret};
     /*
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
