@@ -120,7 +120,7 @@ function main(params) {
       var responses = [];
       
       for (var i=0;i<lights.length;i++) {
-        responses[i] = setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).done();
+        responses[i] = setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
       }
       
       
