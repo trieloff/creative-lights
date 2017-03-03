@@ -119,7 +119,9 @@ function main(params) {
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
                 "status": lights.map(function(light, i) {
-                  setLight(params.bridge, 45, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+                  setLight(params.bridge, 45, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).then(function(res) {
+                    return colors.colors[i%5];
+                  });
                   //return i%5;
                   //return setLight(params.bridge, light, colors.colors[i%5]).then(function(body) {
                   //  return body;
