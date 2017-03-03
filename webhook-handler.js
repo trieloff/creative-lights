@@ -122,7 +122,7 @@ function main(params) {
         return setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).then(function(res) {
           return colors.colors[i%5];
         });
-      })};
+      });
       
       return {};
       return getLights(params.bridge).then(function(lights) {
