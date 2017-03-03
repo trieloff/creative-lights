@@ -116,31 +116,14 @@ function main(params) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
       //return colors;
-      var lights = [45, 48];
-      var responses = lights.map(function(light, i) {
-        return setLight(params.bridge, lights[i], colors.colors[i%5]);
-      });
-      
-      return Promise.all(responses);
+      //var lights = [45, 48];
       
       return getLights(params.bridge).then(function(lights) {
-        return {"lights": lights,
-                "status": lights.map(function(light, i) {
-                  return setLight(params.bridge, 45, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).then(function(res) {
-                    return colors.colors[i%5];
-                  });
-                  //return i%5;
-                  //return setLight(params.bridge, light, colors.colors[i%5]).then(function(body) {
-                  //  return body;
-                  //});
-                  //return colors.colors[i%5];
-                })};
-        /*
-        lights.map(function(light, i) {
-          console.log(i % 5);
-          setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        var responses = lights.map(function(light, i) {
+          return setLight(params.bridge, lights[i], colors.colors[i%5]);
         });
-        */
+        
+        return Promise.all(responses);
       });
     });
     
