@@ -117,13 +117,14 @@ function main(params) {
       //TODO: actually iterate through the colors and change the hue lamps.
       //return colors;
       var lights = [45, 48];
+      var responses = [];
       
       for (var i=0;i<lights.length;i++) {
-        setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        responses[i] = setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).done();
       }
       
       
-      return {"mapped": lights};
+      return {"mapped": responses};
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
                 "status": lights.map(function(light, i) {
