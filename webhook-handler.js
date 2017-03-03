@@ -118,7 +118,7 @@ function main(params) {
       //return colors;
       var lights = [45, 48];
       var responses = lights.map(function(light, i) {
-        return setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        return setLight(params.bridge, lights[i], colors.colors[i%5]);
       });
       
       return Promise.all(responses);
