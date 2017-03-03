@@ -108,7 +108,6 @@ function main(params) {
   if (params.asset && params.asset.urn) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       return getLights(params.bridge).then(function(lights) {
-        //return {"lights": lights};
         var responses = lights.map(function(light, i) {
           return setLight(params.bridge, light, colors.colors[i%5]);
         });
