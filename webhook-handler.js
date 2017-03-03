@@ -116,6 +116,14 @@ function main(params) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
       //return colors;
+      var lights = [45, 48];
+      
+      lights.map(function(light, i) {
+        return setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)}).then(function(res) {
+          return colors.colors[i%5];
+        });
+      })};
+      
       return {};
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
