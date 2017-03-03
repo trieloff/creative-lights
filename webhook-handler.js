@@ -112,22 +112,21 @@ function main(params) {
     
     //setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
     
-    return getLights(params.bridge).then(function(lights) {
-      return {"lights": lights,
-              "status": lights.map(function(light, i) {
-                return i%5;
-              })};
-      /*
-      lights.map(function(light, i) {
-        console.log(i % 5);
-        setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
-      });
-      */
-    });
-    
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
-      return colors;
+      //return colors;
+      return getLights(params.bridge).then(function(lights) {
+        return {"lights": lights,
+                "status": lights.map(function(light, i) {
+                  return i%5;
+                })};
+        /*
+        lights.map(function(light, i) {
+          console.log(i % 5);
+          setLight(params.bridge, light, {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
+        });
+        */
+      });
     });
     
   }
