@@ -11,6 +11,3 @@ package:
                 secret:
                   type: String
                   description: User token for authentication
-                bridge:
-                  type: String
-                  description: Base URL of Hue bridge
