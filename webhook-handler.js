@@ -119,7 +119,7 @@ function main(params) {
         return {"lights": lights,
                 "status": lights.map(function(light, i) {
                   //return i%5;
-                  setLight(params.bridge, light, colors.colors[i%5]);
+                  return setLight(params.bridge, light, colors.colors[i%5]);
                   return colors.colors[i%5];
                 })};
         /*
