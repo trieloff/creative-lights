@@ -116,6 +116,7 @@ function main(params) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
       //TODO: actually iterate through the colors and change the hue lamps.
       //return colors;
+      return {};
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
                 "status": lights.map(function(light, i) {
