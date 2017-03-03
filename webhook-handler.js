@@ -123,7 +123,7 @@ function main(params) {
         responses[i] = setLight(params.bridge, lights[i], {"on":true, "sat":254, "bri":254,"hue":Math.round(Math.random()*65000)});
       }
       
-      
+      return Promise.all(responses);
       return {"mapped": responses};
       return getLights(params.bridge).then(function(lights) {
         return {"lights": lights,
