@@ -31,6 +31,8 @@ You will need:
  - 1 SIM card
  - 1 iPhone with the Philips Hue app installed
  
+You can order all of that from this [Amazon List](http://www.amazon.com/registry/wishlist/3IDQ3P6TZDP5C/ref=cm_sw_r_tw_ws_x_AITVybDQ68PBH)
+ 
 Do this only once.
  
 1. Put the SIM card into the SIM card slot in the router and turn on the router
