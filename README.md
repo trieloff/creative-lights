@@ -45,7 +45,7 @@ Do this only once.
 10. (optional) add the serial numbers of the Hue Go lights. Numbers can be found at the bottom of the light, look for "S/N". Adding the numbers will make the process more reliable when switching lights between bridges or re-using lights
 11. Tap "Search". Your lights should show up in the app.
 12. (optional) Go back to "Home" and create a room as promted. This will allow you to control the lights using the app, which can help with troubleshooting.
-13. Look up the bridge's IP address in the Hue app: "Settings", "Hue bridges", tap "i" next to your bridge, "Network settings", turn off "DHCP", note the IP address, then tap cancel (we only want to look the IP address up, not change any configuration)
+13. Look up the bridge's IP address in the Hue app: "Settings", "Hue bridges", tap "i" next to your bridge, "Network settings", turn off "DHCP", note the IP address, save. The router will re-assign IP addresses after a short while, so we should reserve the address for the bridge.
 14. Open the router's admin interface in a web browser, the IP address should be 192.168.1.0. Username/password is admin/admin
 15. Click "Forwarding", "add new". Pick a "service port", e.g. 8080, use 80 for "internal port", and the bridge's IP address for "IP address". Click save.
 16. (optional) set up Dynamic DNS
