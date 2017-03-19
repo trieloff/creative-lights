@@ -54,9 +54,7 @@ function rgb2Hue(hex) {
 	var g = parseInt(hex.substring(2, 4), 16) / 255;
 	var b = parseInt(hex.substring(4, 6), 16) / 255;
 	
-	r = g;
-	b = g;
-
+	
     var max = Math.max(r, g, b), min = Math.min(r, g, b);
     var h, s, l = (max + min) / 2;
 
