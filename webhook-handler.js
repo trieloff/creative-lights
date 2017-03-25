@@ -89,9 +89,9 @@ function main(params) {
   }
   if (params.asset && params.asset.urn) {
     return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
-      return getLights("http://100.96.36.80:8080").then(function(lights) {
+      return getLights(params.bridge).then(function(lights) {
         var responses = lights.map(function(light, i) {
-          return setLight("http://100.96.36.80:8080", light, colors.colors[i%5]);
+          return setLight(params.bridge, light, colors.colors[i%5]);
         });        
         return Promise.all(responses);
       });
