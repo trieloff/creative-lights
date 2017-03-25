@@ -65,6 +65,9 @@ function rgb2Hue(hex) {
         h /= 6;
     }
     
+    l = 0.5;
+    s = 0.5;
+    
 	//transform into Hue's format
     return { "on": true, "bri": Math.round(l * 254), "hue": Math.round(h * 65535), "sat": Math.round(s * 254), "alert": "select" };
 }
