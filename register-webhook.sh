@@ -49,7 +49,7 @@ curl \
 	--header "x-api-key: $CLIENT_ID" \
 	--header "x-ams-consumer-id: $CONSUMER_ID" \
 	--header "x-ams-application-id: $APPLICATION_ID" \
-	-d '{ "client_id": "'$CLIENT_ID'", "name": "Files uploaded", "description": "Let me know when files have been uploaded", "webhook_url": "'$WEBHOOK_URL'",   "events_of_interest": [{ "provider": "ci_sc_stg", "event_code": "asset_created"},  { "provider": "ci_sc_stg", "event_code": "asset_updated"},  { "provider": "ci_sc_stg", "event_code": "asset_deleted"} ]    }' \
+	-d '{ "client_id": "'$CLIENT_ID'", "name": "Files uploaded", "description": "Let me know when files have been uploaded", "webhook_url": "'$WEBHOOK_URL'",   "events_of_interest": [{ "provider": "ccstorage", "event_code": "asset_created"},  { "provider": "ccstorage", "event_code": "asset_updated"},  { "provider": "ccstorage", "event_code": "asset_deleted"} ]    }' \
 	"https://csm-stage.adobe.io/csm/webhooks"
 
 echo "WebHook registered."
