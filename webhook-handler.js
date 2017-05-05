@@ -87,8 +87,8 @@ function main(params) {
   if (challenge) {
     return { "challenge": challenge };
   }
-  if (params.asset && params.asset.urn) {
-    return getColors(params.asset.urn, decrypt(secrettoken, params.secret)).then(function(colors) {
+  if (params.asset && params.asset.url) {
+    return getColors(params.asset.url, decrypt(secrettoken, params.secret)).then(function(colors) {
       return getLights(params.bridge).then(function(lights) {
         var responses = lights.map(function(light, i) {
           return setLight(params.bridge, light, colors.colors[i%5]);
